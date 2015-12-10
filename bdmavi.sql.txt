@@ -1,0 +1,332 @@
+-- phpMyAdmin SQL Dump
+-- version 2.10.3
+-- http://www.phpmyadmin.net
+-- 
+-- Servidor: localhost
+-- Tiempo de generación: 09-12-2015 a las 10:12:46
+-- Versión del servidor: 5.0.51
+-- Versión de PHP: 5.2.6
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+-- 
+-- Base de datos: `bdmavi`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `cat_area`
+-- 
+
+CREATE TABLE `cat_area` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `area` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `cat_area`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `cat_privilegios`
+-- 
+
+CREATE TABLE `cat_privilegios` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `privilegio` varchar(45) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+-- 
+-- Volcar la base de datos para la tabla `cat_privilegios`
+-- 
+
+INSERT INTO `cat_privilegios` VALUES (1, 'Administrador');
+INSERT INTO `cat_privilegios` VALUES (2, 'Coordinador');
+INSERT INTO `cat_privilegios` VALUES (3, 'Jurado');
+INSERT INTO `cat_privilegios` VALUES (4, 'Competidor');
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `cat_regiones`
+-- 
+
+CREATE TABLE `cat_regiones` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `region` varchar(45) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- 
+-- Volcar la base de datos para la tabla `cat_regiones`
+-- 
+
+INSERT INTO `cat_regiones` VALUES (1, 'Zona I');
+INSERT INTO `cat_regiones` VALUES (2, 'Zona II');
+INSERT INTO `cat_regiones` VALUES (3, 'Zona III');
+INSERT INTO `cat_regiones` VALUES (4, 'Zona IV');
+INSERT INTO `cat_regiones` VALUES (5, 'Zona V');
+INSERT INTO `cat_regiones` VALUES (6, 'Zona VI');
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `cat_temas`
+-- 
+
+CREATE TABLE `cat_temas` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `tema` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `cat_temas`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `cat_universidad`
+-- 
+
+CREATE TABLE `cat_universidad` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nombre` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+-- 
+-- Volcar la base de datos para la tabla `cat_universidad`
+-- 
+
+INSERT INTO `cat_universidad` VALUES (1, 'Universidad Veracruzana');
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `competencia`
+-- 
+
+CREATE TABLE `competencia` (
+  `id` int(15) NOT NULL auto_increment,
+  `usuario_id` int(10) NOT NULL default '0',
+  `cuestionario_pregunta_id` int(10) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `competencia`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `correcciones`
+-- 
+
+CREATE TABLE `correcciones` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `cuestionario_pregunta_id` int(10) unsigned NOT NULL default '0',
+  `tipo` varchar(45) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `correcciones`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `cuestionario_pregunta`
+-- 
+
+CREATE TABLE `cuestionario_pregunta` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `etapa_id` int(10) unsigned NOT NULL default '0',
+  `maraton_id` int(10) unsigned NOT NULL default '0',
+  `preguntas_id` int(10) unsigned NOT NULL default '0',
+  `secuencia` int(11) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `cuestionario_pregunta`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `docente`
+-- 
+
+CREATE TABLE `docente` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nombre` varchar(45) default NULL,
+  `apellido_paterno` varchar(45) default NULL,
+  `apellido_materno` varchar(45) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `docente`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `etapa`
+-- 
+
+CREATE TABLE `etapa` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nombre` varchar(45) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+-- 
+-- Volcar la base de datos para la tabla `etapa`
+-- 
+
+INSERT INTO `etapa` VALUES (1, 'Primera Fase');
+INSERT INTO `etapa` VALUES (2, 'Segunda Fase');
+INSERT INTO `etapa` VALUES (3, 'Tercera Fase');
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `maraton`
+-- 
+
+CREATE TABLE `maraton` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `cat_universidad_id` int(10) unsigned NOT NULL default '0',
+  `cat_regiones_id` int(10) unsigned NOT NULL default '0',
+  `nombre_tema` varchar(255) default NULL,
+  `fecha_creacion` date default NULL,
+  `fecha_aplicacion` date default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `maraton`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `maraton_activo`
+-- 
+
+CREATE TABLE `maraton_activo` (
+  `id` int(10) NOT NULL auto_increment,
+  `cuestionario_pregunta_id` int(10) default NULL,
+  `activo` tinyint(1) default NULL,
+  `usuario_id` int(10) NOT NULL default '0',
+  PRIMARY KEY  (`id`,`usuario_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `maraton_activo`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `preferencias`
+-- 
+
+CREATE TABLE `preferencias` (
+  `usuario_id` int(5) default NULL,
+  `color_default` varchar(7) default '#FFFFFF',
+  `id` int(5) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- 
+-- Volcar la base de datos para la tabla `preferencias`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `preguntas`
+-- 
+
+CREATE TABLE `preguntas` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `cat_temas_id` int(10) unsigned NOT NULL default '0',
+  `cat_area_id` int(10) unsigned NOT NULL default '0',
+  `nombre_docente` varchar(200) character set latin1 default NULL,
+  `pregunta` text character set latin1,
+  `opcion1` text character set latin1,
+  `opcion2` text character set latin1,
+  `opcion3` text character set latin1,
+  `opcion4` text character set latin1,
+  `respuesta` char(1) character set latin1 default NULL,
+  `grado_dificultad` int(11) default NULL,
+  `tipo` varchar(20) character set latin1 default NULL,
+  `justificacion` text character set latin1,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `preguntas`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `respuesta`
+-- 
+
+CREATE TABLE `respuesta` (
+  `id` int(10) unsigned NOT NULL,
+  `cuestionario_pregunta_id` int(10) unsigned NOT NULL default '0',
+  `usuario_id` int(10) unsigned NOT NULL default '0',
+  `respuesta` int(11) NOT NULL default '0',
+  `tiempo` int(1) NOT NULL default '0',
+  PRIMARY KEY  (`cuestionario_pregunta_id`,`usuario_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- 
+-- Volcar la base de datos para la tabla `respuesta`
+-- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `usuario`
+-- 
+
+CREATE TABLE `usuario` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `cat_privilegios_id` int(10) unsigned NOT NULL default '0',
+  `nombre` varchar(18) default NULL,
+  `contrasenia` varchar(18) default NULL,
+  `online` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=66 ;
+
+-- 
+-- Volcar la base de datos para la tabla `usuario`
+-- 
+
+INSERT INTO `usuario` VALUES (1, 1, 'admin', 'admin', 0);
+INSERT INTO `usuario` VALUES (3, 2, 'coordinador', 'coordinador', 0);
